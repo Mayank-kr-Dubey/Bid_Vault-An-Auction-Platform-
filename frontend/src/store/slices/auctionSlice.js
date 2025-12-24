@@ -90,7 +90,7 @@ export const getAllAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getAllAuctionItemRequest());
   try {
     const response = await axios.get(
-      "${import.meta.env.VITE_API_URL}/api/v1/auctionitem/allitems",
+      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/allitems`,
       { withCredentials: true }
     );
     dispatch(
@@ -108,7 +108,7 @@ export const getMyAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getMyAuctionsRequest());
   try {
     const response = await axios.get(
-      "${import.meta.env.VITE_API_URL}/api/v1/auctionitem/myitems",
+      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/myitems`,
       { withCredentials: true }
     );
     dispatch(auctionSlice.actions.getMyAuctionsSuccess(response.data.items));
@@ -140,7 +140,7 @@ export const createAuction = (data) => async (dispatch) => {
   dispatch(auctionSlice.actions.createAuctionRequest());
   try {
     const response = await axios.post(
-      "${import.meta.env.VITE_API_URL}/api/v1/auctionitem/create",
+      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/create`,
       data,
       {
         withCredentials: true,

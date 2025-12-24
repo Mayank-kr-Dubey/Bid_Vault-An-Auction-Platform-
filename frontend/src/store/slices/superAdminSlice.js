@@ -107,7 +107,7 @@ export const getMonthlyRevenue = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForMonthlyRevenue());
   try {
     const response = await axios.get(
-      "${import.meta.env.VITE_API_URL}/api/v1/superadmin/monthlyincome",
+      `${import.meta.env.VITE_API_URL}/api/v1/superadmin/monthlyincome`,
       { withCredentials: true }
     );
     dispatch(
@@ -125,7 +125,7 @@ export const getAllUsers = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForAllUsers());
   try {
     const response = await axios.get(
-      "${import.meta.env.VITE_API_URL}/api/v1/superadmin/users/getall",
+      `${import.meta.env.VITE_API_URL}/api/v1/superadmin/users/getall`,
       { withCredentials: true }
     );
     dispatch(superAdminSlice.actions.successForAllUsers(response.data));
@@ -139,7 +139,7 @@ export const getAllPaymentProofs = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForPaymentProofs());
   try {
     const response = await axios.get(
-      "${import.meta.env.VITE_API_URL}/api/v1/superadmin/paymentproofs/getall",
+      `${import.meta.env.VITE_API_URL}/api/v1/superadmin/paymentproofs/getall`,
       { withCredentials: true }
     );
     dispatch(
