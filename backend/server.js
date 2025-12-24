@@ -10,3 +10,9 @@ cloudinary.v2.config({
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
 });
+
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://bidvault.netlify.app/', 
+  credentials: true
+}));
