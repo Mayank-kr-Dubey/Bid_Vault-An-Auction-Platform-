@@ -13,6 +13,6 @@ app.listen(process.env.PORT, () => {
 
 const cors = require('cors');
 app.use(cors({
-  origin: 'https://bidvault.netlify.app/',
+  origin: 'https://bidvault.netlify.app',
   credentials: true
 }));
