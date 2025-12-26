@@ -23,7 +23,20 @@ config({
 //   credentials: true,  // Allows cookies/auth headers
 // }));
 
-app.use(cors());
+// app.use(cors());
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://neelami.netlify.app/",
+];
+
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin || allowedOrigins.includes(origin)) cb(null, true);
+    else cb(new Error("Not allowed by CORS"));
+  },
+  credentials: true
+}));
 
 app.use(cookieParser());
 app.use(express.json());
