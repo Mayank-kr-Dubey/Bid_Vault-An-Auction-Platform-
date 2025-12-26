@@ -18,10 +18,12 @@ config({
   path: "../.env",
 });
 
-app.use(cors({
-  origin: process.env.FRONTEND_URL,       // Reflects request origin
-  credentials: true,  // Allows cookies/auth headers
-}));
+// app.use(cors({
+//   origin: process.env.FRONTEND_URL,       // Reflects request origin
+//   credentials: true,  // Allows cookies/auth headers
+// }));
+
+app.use(cors());
 
 app.use(cookieParser());
 app.use(express.json());

@@ -12,7 +12,8 @@ app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
 });
 
-app.use(cors({
-  origin: process.env.FRONTEND_URL,       // Reflects request origin
-  credentials: true,  // Allows cookies/auth headers
-}));
+// app.use(cors({
+//   origin: process.env.FRONTEND_URL,       // Reflects request origin
+//   credentials: true,  // Allows cookies/auth headers
+// }));
+app.use(cors());
