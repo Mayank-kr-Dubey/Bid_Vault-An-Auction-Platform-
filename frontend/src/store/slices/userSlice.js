@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 import { toast } from "react-toastify";
 
 const userSlice = createSlice({
@@ -90,11 +90,10 @@ const userSlice = createSlice({
 export const register = (data) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest());
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/v1/user/register`,
+    const response = await axiosInstance.post(
+      `/api/v1/user/register`,
       data,
       {
-        withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
@@ -111,11 +110,10 @@ export const register = (data) => async (dispatch) => {
 export const login = (data) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/v1/user/login`,
+    const response = await axiosInstance.post(
+      `/api/v1/user/login`,
       data,
       {
-        withCredentials: true,
         headers: { "Content-Type": "application/json" },
       }
     );
@@ -131,9 +129,8 @@ export const login = (data) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/user/logout`,
-      { withCredentials: true }
+    const response = await axiosInstance.get(
+      `/api/v1/user/logout`    
     );
     dispatch(userSlice.actions.logoutSuccess());
     toast.success(response.data.message);
@@ -148,12 +145,11 @@ export const logout = () => async (dispatch) => {
 export const fetchUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest());
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/user/me`, {
-      withCredentials: true,
-    });
+    const response = await axiosInstance.get(`/api/v1/user/me`);
     dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
+    console.log("Haan yehi dikkat ha");
     dispatch(userSlice.actions.fetchUserFailed());
     dispatch(userSlice.actions.clearAllErrors());
     console.error(error);
@@ -163,11 +159,8 @@ export const fetchUser = () => async (dispatch) => {
 export const fetchLeaderboard = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchLeaderboardRequest());
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/user/leaderboard`,
-      {
-        withCredentials: true,
-      }
+    const response = await axiosInstance.get(
+      `/api/v1/user/leaderboard`
     );
     dispatch(
       userSlice.actions.fetchLeaderboardSuccess(response.data.leaderboard)

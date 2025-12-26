@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 import { toast } from "react-toastify";
 import { getAuctionDetail } from "./auctionSlice";
 
@@ -24,8 +24,7 @@ const bidSlice = createSlice({
 export const placeBid = (id, data) => async (dispatch) => {
   dispatch(bidSlice.actions.bidRequest());
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/bid/place/${id}`, data, {
-      withCredentials: true,
+    const response = await axiosInstance.post(`/api/v1/bid/place/${id}`, data, {
       headers: { "Content-Type": "application/json" },
     });
     dispatch(bidSlice.actions.bidSuccess());

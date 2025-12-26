@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { toast } from "react-toastify";
+import axiosInstance from "@/utils/axiosInstance";
 
 const auctionSlice = createSlice({
   name: "auction",
@@ -89,10 +89,7 @@ const auctionSlice = createSlice({
 export const getAllAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getAllAuctionItemRequest());
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/allitems`,
-      { withCredentials: true }
-    );
+    const response = await axiosInstance.get("/api/v1/auctionitem/allitems");
     dispatch(
       auctionSlice.actions.getAllAuctionItemSuccess(response.data.items)
     );
@@ -107,10 +104,7 @@ export const getAllAuctionItems = () => async (dispatch) => {
 export const getMyAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getMyAuctionsRequest());
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/myitems`,
-      { withCredentials: true }
-    );
+    const response = await axiosInstance.get("/api/v1/auctionitem/myitems");
     dispatch(auctionSlice.actions.getMyAuctionsSuccess(response.data.items));
     dispatch(auctionSlice.actions.resetSlice());
   } catch (error) {
@@ -123,10 +117,7 @@ export const getMyAuctionItems = () => async (dispatch) => {
 export const getAuctionDetail = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.getAuctionDetailRequest());
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/auction/${id}`,
-      { withCredentials: true }
-    );
+    const response = await axiosInstance.get(`/api/v1/auctionitem/auction/${id}`);
     dispatch(auctionSlice.actions.getAuctionDetailSuccess(response.data));
     dispatch(auctionSlice.actions.resetSlice());
   } catch (error) {
@@ -139,11 +130,10 @@ export const getAuctionDetail = (id) => async (dispatch) => {
 export const createAuction = (data) => async (dispatch) => {
   dispatch(auctionSlice.actions.createAuctionRequest());
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/create`,
+    const response = await axiosInstance.post(
+      "/api/v1/auctionitem/create",
       data,
       {
-        withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
@@ -161,11 +151,10 @@ export const createAuction = (data) => async (dispatch) => {
 export const republishAuction = (id, data) => async (dispatch) => {
   dispatch(auctionSlice.actions.republishItemRequest());
   try {
-    const response = await axios.put(
-      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/item/republish/${id}`,
+    const response = await axiosInstance.put(
+      `/api/v1/auctionitem/item/republish/${id}`,
       data,
       {
-        withCredentials: true,
         headers: { "Content-Type": "application/json" },
       }
     );
@@ -185,8 +174,8 @@ export const republishAuction = (id, data) => async (dispatch) => {
 export const deleteAuction = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.deleteAuctionItemRequest());
   try {
-    const response = await axios.delete(
-      `${import.meta.env.VITE_API_URL}/api/v1/auctionitem/delete/${id}`,
+    const response = await axiosInstance.delete(
+      `/api/v1/auctionitem/delete/${id}`,
       {
         withCredentials: true,
       }
