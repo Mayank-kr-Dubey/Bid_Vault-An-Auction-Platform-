@@ -19,8 +19,8 @@ config({
 });
 
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your frontend's origin
-  credentials: true
+  origin: process.env.FRONTEND_URL,       // Reflects request origin
+  credentials: true,  // Allows cookies/auth headers
 }));
 
 app.use(cookieParser());
