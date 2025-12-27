@@ -18,24 +18,9 @@ config({
   path: "../.env",
 });
 
-// app.use(cors({
-//   origin: process.env.FRONTEND_URL,       // Reflects request origin
-//   credentials: true,  // Allows cookies/auth headers
-// }));
-
-// app.use(cors());
-
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://neelami.netlify.app/",
-];
-
 app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) cb(null, true);
-    else cb(new Error("Not allowed by CORS"));
-  },
-  credentials: true
+  origin: process.env.FRONTEND_URL,       // Reflects request origin
+  credentials: true,  // Allows cookies/auth headers
 }));
 
 app.use(cookieParser());

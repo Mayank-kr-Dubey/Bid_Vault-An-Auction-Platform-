@@ -1,6 +1,5 @@
 import app from "./app.js";
 import cloudinary from "cloudinary";
-import cors from 'cors';
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -11,22 +10,3 @@ cloudinary.v2.config({
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
 });
-
-// app.use(cors({
-//   origin: process.env.FRONTEND_URL,       // Reflects request origin
-//   credentials: true,  // Allows cookies/auth headers
-// }));
-// app.use(cors());
-
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://neelami.netlify.app/",
-];
-
-app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) cb(null, true);
-    else cb(new Error("Not allowed by CORS"));
-  },
-  credentials: true
-}));
